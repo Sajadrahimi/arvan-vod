@@ -73,10 +73,6 @@ class Video(DynamicType):
 	# channel: Channel
 
 	def __init__(self, **kwargs):
-		# if 'file_info' in kwargs:
-		# 	self.file_info = get_type(self, (**kwargs['file_info'])
-		# 	del kwargs['file_info']
-
 		if 'convert_info' in kwargs:
 			self.convert_info = []
 			for convert_info in kwargs['convert_info']:
