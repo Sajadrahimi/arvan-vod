@@ -1,5 +1,5 @@
 import inspect
-from typing import Union
+from typing import Union, List, _GenericAlias
 
 
 class ARBool(int):
@@ -21,6 +21,8 @@ class DynamicType:
 	def __init__(self, *arg, **kwargs):
 		for k in kwargs:
 			target_type = get_type(self, k)
+			if isinstance(target_type, _GenericAlias):
+				target_type = target_type.__args__[0]
 			if not issubclass(target_type, DynamicType):
 				setattr(self, k, target_type(kwargs[k]))
 			else:

@@ -29,21 +29,27 @@ class FileInfo(DynamicType):
 		self.audio = None
 		if 'general' in kwargs:
 			self.general = self.General(**kwargs['general'])
-			del kwargs['general']
-		if 'video' in kwargs:
+		del kwargs['general']
+		if 'video' in kwargs and kwargs['video']:
 			self.video = self.Video(**kwargs['video'])
-			del kwargs['video']
-		if 'audio' in kwargs:
+		del kwargs['video']
+		if 'audio' in kwargs and kwargs['audio']:
 			self.audio = self.Audio(**kwargs['audio'])
-			del kwargs['audio']
+		del kwargs['audio']
 
 		super().__init__(**kwargs)
+
+	def __str__(self):
+		return self.general.format or super().__str__()
 
 
 class ConvertInfo(DynamicType):
 	audio_bitrate: int
 	video_bitrate: int
 	resolution: str
+
+	def __str__(self):
+		return self.resolution
 
 
 class Video(DynamicType):
@@ -70,20 +76,24 @@ class Video(DynamicType):
 	tooltip_url: str
 	video_url: str
 	player_url: str
+
 	# channel: Channel
 
 	def __init__(self, **kwargs):
 		if 'convert_info' in kwargs:
 			self.convert_info = []
-			for convert_info in kwargs['convert_info']:
-				self.convert_info.append(ConvertInfo(**convert_info))
-			del kwargs['convert_info']
+			if 'convert_info' in kwargs:
+				if isinstance(kwargs['convert_info'], list):
+					for convert_info in kwargs['convert_info']:
+						self.convert_info.append(ConvertInfo(**convert_info))
+				del kwargs['convert_info']
 
 		if 'mp4_videos' in kwargs:
 			self.mp4_videos = kwargs['mp4_videos']
 			del kwargs['mp4_videos']
-		kwargs['video_id'] = kwargs.pop('id')
-		del kwargs['channel']
+		if 'id' in kwargs:
+			kwargs['video_id'] = kwargs.pop('id')
+			del kwargs['channel']
 		super().__init__(**kwargs)
 
 	def __str__(self):
