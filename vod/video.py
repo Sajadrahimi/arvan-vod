@@ -30,11 +30,13 @@ class FileInfo(DynamicType):
 		if 'general' in kwargs:
 			self.general = self.General(**kwargs['general'])
 			del kwargs['general']
-		if 'video' in kwargs and kwargs['video']:
-			self.video = self.Video(**kwargs['video'])
+		if 'video' in kwargs:
+			if kwargs['video']:
+				self.video = self.Video(**kwargs['video'])
 			del kwargs['video']
-		if 'audio' in kwargs and kwargs['audio']:
-			self.audio = self.Audio(**kwargs['audio'])
+		if 'audio' in kwargs:
+			if kwargs['audio']:
+				self.audio = self.Audio(**kwargs['audio'])
 			del kwargs['audio']
 
 		super().__init__(**kwargs)

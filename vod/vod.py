@@ -23,11 +23,17 @@ class VOD(Arvan):
 		r = self._send_request('GET', self.get_channels_url, query_params)
 		return [Channel(**x) for x in r]
 
-	def get_videos(self, channel: Union[int, Channel]):
+	def get_videos(self, channel: Union[int, Channel], title: str = None):
 		channel_id = channel
 		if isinstance(channel, Channel):
 			channel_id = channel.channel_id
-		r = self._send_request('GET', self.get_videos_urls.format(**{'channel_id': channel_id}))
+		query_params = {'per_page': 1000}
+		if title:
+			query_params['filter'] = title
+		r = self._send_request('GET', self.get_videos_urls.format(**{'channel_id': channel_id}),
+							   query_params=query_params)
+		if len(r) == 1:
+			return Video(**r[0])
 		return [Video(**x) for x in r]
 
 	def add_video(self, channel: Union[int, Channel], title: str = None, video_url: str = None, file_id: str = None,
@@ -57,8 +63,7 @@ class VOD(Arvan):
 		return Video(**r)
 
 	def request_upload(self, channel: Union[int, Channel], file_path: str, file_type: str = 'video/mp4',
-					   tus_resumable: str = "1.0.0", upload_length: int = 10096,
-					   upload_metadata: str = None):
+					   tus_resumable: str = "1.0.0", upload_length: int = 10096, upload_metadata: str = None):
 		channel_id = channel
 		if isinstance(channel, Channel):
 			channel_id = channel.channel_id
