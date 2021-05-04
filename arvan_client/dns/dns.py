@@ -1,6 +1,6 @@
 import logging
 
-from arvan_client.arvan import Arvan
+from arvan_client.arvan.api import Arvan
 from arvan_client.dns.domain import Domain
 
 
