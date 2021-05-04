@@ -4,9 +4,9 @@ from typing import Union
 
 import requests
 
-from arvan.api import Arvan
-from vod.channel import Channel
-from vod.video import Video
+from arvan_client.arvan import Arvan
+from arvan_client.vod.channel import Channel
+from arvan_client.vod.video import Video
 
 
 class VOD(Arvan):
