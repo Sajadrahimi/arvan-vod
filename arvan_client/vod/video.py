@@ -1,6 +1,6 @@
 from typing import List
 
-from arvan.types import DynamicType
+from arvan_client.arvan.types import DynamicType
 
 
 class FileInfo(DynamicType):
