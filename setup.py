@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="arvan_client",
-    version="0.0.2",
+    version="0.0.3",
     author="Sajad Rahimi",
     author_email="rahimisajad@outlook.com",
     description="A Python SDK for ArvanCloud API",
