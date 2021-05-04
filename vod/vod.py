@@ -60,7 +60,11 @@ class VOD(Arvan):
 		}
 		url = self.add_video_url.format(**{'channel': channel_id})
 		r = self._send_request('post', url, json={**base_data, **source})
-		return Video(**r)
+		try:
+			return Video(**r)
+		except Exception as e:
+			print(e)
+			return r
 
 	def request_upload(self, channel: Union[int, Channel], file_path: str, file_type: str = 'video/mp4',
 					   tus_resumable: str = "1.0.0", upload_length: int = 10096, upload_metadata: str = None):
