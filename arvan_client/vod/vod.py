@@ -107,5 +107,5 @@ class VOD(Arvan):
     def delete_video(self, video: Union[str, Video]):
         if isinstance(video, Video):
             video = video.video_id
-        self.send_request('delete',
-                          self.delete_video_url.format({'video': video}))
+        return self.send_request('delete',
+                          self.delete_video_url.format(**{'video': video}))
