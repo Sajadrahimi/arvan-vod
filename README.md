@@ -4,7 +4,7 @@ A python SDK for ArvanCloud API
 
 # VOD
 ```
-  from vod.vod import VOD
+  from arvan_client.vod.vod import VOD
   
   vod = VOD('MY API KEY')
   channels = vod.get_channels()
