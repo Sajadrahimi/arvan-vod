@@ -1,8 +1,6 @@
-# arvan-client
+# arvan-vod
 A Python SDK for ArvanCloud's VOD API
 
-
-# VOD
 ```
   from arvan_client.vod.vod import VOD
   
