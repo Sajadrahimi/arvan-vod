@@ -1,5 +1,5 @@
 # arvan-client
-A python SDK for ArvanCloud API
+A Python SDK for ArvanCloud's VOD API
 
 
 # VOD
